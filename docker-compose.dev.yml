@@ -1,0 +1,18 @@
+services:
+  warehouse-service:
+    build: ./warehouse-service
+    container_name: warehouse-service
+    image: warehouse-service:latest
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "7060:7060"
+    networks:
+      - insett-network
+
+networks:
+  insett-network:
+    driver: bridge
+    external: true
