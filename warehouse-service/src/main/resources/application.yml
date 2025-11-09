@@ -1,1 +1,21 @@
-spring.application.name=warehouse-service
+spring:
+  application:
+    name: warehouse-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari.maximum-pool-size: 20
+    url: jdbc:postgresql://${POSTGRES_HOST}:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    properties:
+      properties.hibernate.format_sql: true
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update # validate, schema managing migration tool
+    show-sql: true # false
+  sql:
+    init:
+      mode: always # never
+server:
+  port: 7060
