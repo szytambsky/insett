@@ -22,42 +22,10 @@ Services are communicating inside internal pre-created 🐳 Docker network by ho
 
 ### Services start
 
-create network external network (one-time use only)
-
 TODO: by script ansible/terraform/init.sh
-
-```bash
-docker network create --driver bridge insett-network
-````
 
 #### dev
 ```bash
-docker compose -f ./docker-compose.dev.yml up -d
+docker compose -f ./docker-compose.dev.yml \
+up -d --build --force-recreate --remove-orphans
 ```
-```bash
-docker compose -f ./docker-compose.dev.yml -f infra/docker-compose.kafka.yml up -d
-```
-
-#### prod
-```bash
-docker compose -f ./docker-compose.prod.yml -f infra/docker-compose.kafka.yml up -d
-```
-
-#### with api-gateway prod
-```bash
-docker compose -f ./docker-compose.prod.yml \
-               -f infra/docker-compose.kafka.yml \
-               -f infra/docker-compose.gateway.yml up -d --build --force-recreate
-```
-
-#### with auth-service prod
-```bash
-docker compose -f ./docker-compose.prod.yml \
-               -f infra/docker-compose.kafka.yml \
-               -f infra/docker-compose.gateway.yml \
-               -f infra/docker-compose.auth.yml \
-               -f infra/docker-compose.cache.yml \
-               -f monitoring/docker-compose.monitoring.yml up -d --build --force-recreate
-```
-
-
