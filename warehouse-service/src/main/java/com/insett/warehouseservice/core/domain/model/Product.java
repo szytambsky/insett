@@ -23,6 +23,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,7 +39,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID productId;
 
-    private String name;
+    private String productName;
     private String description;
     private BigDecimal price;
     private String sku;
@@ -65,7 +66,7 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "productId"),
             inverseJoinColumns = @JoinColumn(name = "inventory_id", referencedColumnName = "inventoryId")
     )
-    private List<Inventory> inventories;
+    private List<Inventory> inventories = new ArrayList<>();
 
     private BigDecimal updatePrice(BigDecimal newPrice) {
         this.price = newPrice;

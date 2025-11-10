@@ -41,10 +41,6 @@ public class Listing {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     public void activate() {
         this.active = true;
     }

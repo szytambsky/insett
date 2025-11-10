@@ -3,7 +3,7 @@ package com.insett.warehouseservice.core.domain.qualifier;
 import lombok.Getter;
 
 @Getter
-public enum ProductCategoryType {
+public enum CategoryType {
     BUSINESS(15),
     REAL_ESTATE(22),
     ELECTRONICS(30),
@@ -14,14 +14,14 @@ public enum ProductCategoryType {
     HEALTH(10),
     FOR_CHILDREN(15);
 
-    ProductCategoryType(int value) {
+    CategoryType(int value) {
         this.taxRate = value;
     }
 
     private final int taxRate;
 
     public boolean isForAdults() {
-        return !this.equals(ProductCategoryType.FOR_CHILDREN);
+        return !this.equals(CategoryType.FOR_CHILDREN);
     }
 
     public boolean isPhysicalProduct() {

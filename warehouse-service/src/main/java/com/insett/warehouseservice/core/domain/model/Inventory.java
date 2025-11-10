@@ -1,6 +1,7 @@
 package com.insett.warehouseservice.core.domain.model;
 
-import com.insett.warehouseservice.core.domain.qualifier.LocationQualifier;
+import com.insett.warehouseservice.core.domain.qualifier.Location;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
@@ -17,8 +18,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,29 +36,30 @@ public class Inventory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID inventoryId;
 
-    private BigDecimal quantity;
+    private BigInteger quantity;
 
     @LastModifiedDate
-    private LocalDateTime lastUpdated;
+    private LocalDateTime updatedAt;
 
     @Enumerated(EnumType.STRING)
-    private LocationQualifier warehouseLocation;
+    @Column(nullable = false)
+    private Location location;
 
     @ManyToMany(mappedBy = "inventories")
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
-    private BigDecimal addStock(BigDecimal qty) {
+    private BigInteger addStock(BigInteger qty) {
         this.quantity = this.quantity.add(qty);
         return this.quantity;
     }
 
-    private BigDecimal removeStock(BigDecimal qty) {
+    private BigInteger removeStock(BigInteger qty) {
         this.quantity = this.quantity.subtract(qty);
         return this.quantity;
     }
 
-    private boolean reserveStock(BigDecimal qty) {
-        BigDecimal quantityLeft = this.quantity.subtract(qty);
+    private boolean reserveStock(BigInteger qty) {
+        BigInteger quantityLeft = this.quantity.subtract(qty);
         return quantityLeft.intValue() > 0;
     }
 }

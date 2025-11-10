@@ -1,6 +1,6 @@
 package com.insett.warehouseservice.core.domain.model;
 
-import com.insett.warehouseservice.core.domain.qualifier.ProductCategoryType;
+import com.insett.warehouseservice.core.domain.qualifier.CategoryType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,13 +29,13 @@ public class ProductCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID categoryId;
+    private UUID productCategoryId;
 
     @Enumerated(EnumType.STRING)
-    private ProductCategoryType categoryType;
+    private CategoryType categoryType;
     private String name;
     private String description;
 
     @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 }

@@ -14,7 +14,7 @@ public interface ProductMapper {
     Product toEntity(ProductRequest productRequest);
 
     @Mappings({
-            @Mapping(source = "name", target = "name"),
+            @Mapping(source = "productName", target = "name"),
             @Mapping(source = "description", target = "description"),
             @Mapping(source = "price", target = "price"),
             @Mapping(source = "imageUrl", target = "imageUrl"),
