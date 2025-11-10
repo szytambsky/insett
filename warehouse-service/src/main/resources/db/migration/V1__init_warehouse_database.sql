@@ -18,23 +18,11 @@ CREATE TABLE listing
     updated_at  TIMESTAMP
 );
 
-CREATE TYPE category_type AS ENUM (
-  'BUSINESS',
-  'REAL_ESTATE',
-  'ELECTRONICS',
-  'FASHION',
-  'SPORTS',
-  'MUSIC',
-  'COLLECTIBLES',
-  'HEALTH',
-  'FOR_CHILDREN'
-);
-
 CREATE TABLE product_category
 (
-    product_category_id UUID          NOT NULL PRIMARY KEY,
-    category_type       CATEGORY_TYPE NOT NULL,
-    name                TEXT          NOT NULL,
+    product_category_id UUID NOT NULL PRIMARY KEY,
+    category_type       TEXT NOT NULL,
+    name                TEXT NOT NULL,
     description         TEXT
 );
 
@@ -45,7 +33,7 @@ CREATE TABLE product
     description         TEXT,
     price               DECIMAL(10, 2),
     sku                 TEXT      NOT NULL,
-    image_url            TEXT,
+    image_url           TEXT,
     created_at          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at          TIMESTAMP,
     listing_id          UUID UNIQUE REFERENCES listing (listing_id),
