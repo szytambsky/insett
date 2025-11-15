@@ -45,5 +45,8 @@ build/
 /*/cdk.out/
 /*/cdk.out/*
 
+### mount db data
+postgresql_warehouse_data/*
+
 # Os
 .DS_Store
