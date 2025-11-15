@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehouse-postgres-deployment
+  labels:
+    app: warehouse-postgres-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warehouse-postgres-db
+  template:
+    metadata:
+      labels:
+        app: warehouse-postgres-db
+    spec:
+      containers:
+        - name: warehouse-postgres-db
+          image: postgres:17.6
+          imagePullPolicy: IfNotPresent
+          ports:
+              - containerPort: 5432
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: warehouse-postgres-secret
+                key: warehouse_postgres_user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: warehouse-postgres-secret
+                key: warehouse_postgres_password
