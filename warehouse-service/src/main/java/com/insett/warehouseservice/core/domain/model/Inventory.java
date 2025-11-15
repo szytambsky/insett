@@ -15,6 +15,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -38,7 +42,12 @@ public class Inventory {
 
     private BigInteger quantity;
 
-    @LastModifiedDate
+    @CreationTimestamp(source = SourceType.DB)
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp(source = SourceType.DB)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @Enumerated(EnumType.STRING)
