@@ -41,7 +41,9 @@ spec:
                 secretKeyRef:
                   name: warehouse-postgres-secret
                   key: warehouse-postgres-password
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
