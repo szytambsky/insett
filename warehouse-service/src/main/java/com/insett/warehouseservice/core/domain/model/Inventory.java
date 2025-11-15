@@ -18,8 +18,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigInteger;
@@ -56,19 +54,4 @@ public class Inventory {
 
     @ManyToMany(mappedBy = "inventories")
     private List<Product> products = new ArrayList<>();
-
-    private BigInteger addStock(BigInteger qty) {
-        this.quantity = this.quantity.add(qty);
-        return this.quantity;
-    }
-
-    private BigInteger removeStock(BigInteger qty) {
-        this.quantity = this.quantity.subtract(qty);
-        return this.quantity;
-    }
-
-    private boolean reserveStock(BigInteger qty) {
-        BigInteger quantityLeft = this.quantity.subtract(qty);
-        return quantityLeft.intValue() > 0;
-    }
 }

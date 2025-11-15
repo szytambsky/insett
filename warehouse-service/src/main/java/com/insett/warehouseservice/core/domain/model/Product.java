@@ -20,8 +20,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
@@ -71,14 +69,4 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "inventory_id", referencedColumnName = "inventoryId")
     )
     private List<Inventory> inventories = new ArrayList<>();
-
-    private BigDecimal updatePrice(BigDecimal newPrice) {
-        this.price = newPrice;
-        return newPrice;
-    }
-
-    private ProductCategory changeCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-        return productCategory;
-    }
 }
