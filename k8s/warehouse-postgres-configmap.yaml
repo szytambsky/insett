@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: warehouse-postgres-configmap
+data:
+  warehouse-postgres-host: warehouse-postgres-service
+  warehouse-postgres-db: postgres
