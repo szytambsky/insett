@@ -25,12 +25,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: warehouse-postgres-secret
-                key: warehouse_postgres_user
+                key: warehouse-postgres-user
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: warehouse-postgres-secret
-                key: warehouse_postgres_password
+                key: warehouse-postgres-password
 ---
 apiVersion: v1
 kind: Service
