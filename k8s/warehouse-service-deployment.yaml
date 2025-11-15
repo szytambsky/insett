@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehouse-service
+  labels:
+    app: warehouse-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warehouse-service
+  template:
+    metadata:
+      labels:
+        app: warehouse-service
+    spec:
+      containers:
+        - name: warehouse-service
+          image: warehouse-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7060
+          env:
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: warehouse-postgres-configmap
+                  key: warehouse-postgres-host
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: warehouse-postgres-configmap
+                  key: warehouse-postgres-db
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: warehouse-postgres-secret
+                  key: warehouse-postgres-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: warehouse-postgres-secret
+                  key: warehouse-postgres-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: warehouse-service
+spec:
+  selector:
+    app: warehouse-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 7060
+      targetPort: 7060
+      nodePort: 30000
