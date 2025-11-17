@@ -1,4 +1,4 @@
-package com.insett.warehouseservice.core.services.mapper;
+package com.insett.warehouseservice.core.services.product.mapper;
 
 
 import com.insett.warehouseservice.adapters.persistence.ProductDto;

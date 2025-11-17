@@ -2,7 +2,7 @@ package com.insett.warehouseservice.adapters.api;
 
 import com.insett.warehouseservice.adapters.persistence.ProductDto;
 import com.insett.warehouseservice.adapters.persistence.ProductRequest;
-import com.insett.warehouseservice.core.services.ProductService;
+import com.insett.warehouseservice.core.services.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class ProductController {
 
     @PostMapping()
     public ResponseEntity<ProductDto> createProduct(@RequestBody ProductRequest productRequest) {
-        log.info("Creating product {}", productRequest.name());
+        log.info("Creating product {}", productRequest.productName());
         ProductDto newProduct = productService.createProduct(productRequest);
         return ResponseEntity.ok(newProduct);
     }
