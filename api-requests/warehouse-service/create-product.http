@@ -1,0 +1,12 @@
+### Creates a product
+POST http://localhost:7060/api/products
+Content-Type: application/json
+
+{
+  "productName": "Riftbound Origins Booster Box",
+  "description": "Origins, the debut set of Riftbound: League of Legends TCG, brings Champions to the battlefield like never before. Powering up your deck with 14-card booster packs that pull from a pool of nearly 300 cards, this set features a wide variety of art from legendary League of Legends artists. Will you pull an epic game-changer, a stunning alternate art card, or a pack loaded with power",
+  "price": 129,
+  "sku": "RB01BD01-BOX",
+  "imageUrl": "https://merch.riotgames.com/_next/image/?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fdsfx7636%2Fconsumer_products_live%2Fe026ee1a44bc86095f9afc5949c5fdb519b29c66-2560x2560.png%3FaccountingTag%3Dconsumer_products&w=1920&q=75"
+}
+###
