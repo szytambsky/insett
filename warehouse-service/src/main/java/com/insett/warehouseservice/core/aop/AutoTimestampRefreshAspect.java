@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 
@@ -17,8 +18,9 @@ public class AutoTimestampRefreshAspect {
 
     private final EntityManager entityManager;
 
+    @Transactional
     @AfterReturning(
-            pointcut = "execution(* com.insett..*Repository.save(..))",
+            pointcut = "execution(* com.insett.warehouseservice..*Repository.save(..))",
             returning = "entity"
     )
     public void flushAndRefreshAfterUpdateOrSave(Object entity) {
