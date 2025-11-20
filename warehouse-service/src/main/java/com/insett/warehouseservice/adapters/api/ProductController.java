@@ -2,7 +2,7 @@ package com.insett.warehouseservice.adapters.api;
 
 import com.insett.warehouseservice.adapters.persistence.ProductDto;
 import com.insett.warehouseservice.adapters.persistence.ProductRequest;
-import com.insett.warehouseservice.core.services.product.ProductService;
+import com.insett.warehouseservice.core.application.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.insett.warehouseservice.core.services;
+package com.insett.warehouseservice.core.application.services;
 
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.insett.warehouseservice.core.services.product;
+package com.insett.warehouseservice.core.application.product;
 
 import com.insett.warehouseservice.adapters.persistence.ProductDto;
 import com.insett.warehouseservice.adapters.persistence.ProductRequest;

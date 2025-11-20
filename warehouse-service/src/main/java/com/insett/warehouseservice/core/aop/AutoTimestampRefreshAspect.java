@@ -2,6 +2,7 @@ package com.insett.warehouseservice.core.aop;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.hibernate.annotations.SourceType;
@@ -24,7 +25,6 @@ public class AutoTimestampRefreshAspect {
             returning = "entity"
     )
     public void flushAndRefreshAfterUpdateOrSave(Object entity) {
-        System.out.println("Flush after update or refresh");
         if (entity == null) return;
         var needsRefresh = Arrays.stream(entity.getClass()
                         .getDeclaredFields())
