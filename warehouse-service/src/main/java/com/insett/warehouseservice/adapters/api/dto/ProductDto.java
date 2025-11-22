@@ -1,4 +1,4 @@
-package com.insett.warehouseservice.adapters.persistence;
+package com.insett.warehouseservice.adapters.api.dto;
 
 import java.math.BigDecimal;
 
