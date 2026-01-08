@@ -1,0 +1,4 @@
+# curl -i http://localhost:9202/products1/_search
+GET http://localhost:9202/products/_search
+
+### Converted from cURL: CURL http://localhost:9202/products1/_search
