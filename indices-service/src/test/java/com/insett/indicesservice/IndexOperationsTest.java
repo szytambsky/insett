@@ -3,6 +3,7 @@ package com.insett.indicesservice;
 import com.insett.indicesservice.entity.ProductCategory;
 import com.insett.indicesservice.entity.Listing;
 import com.insett.indicesservice.entity.Product;
+import com.insett.indicesservice.entity.Reviews;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -15,21 +16,21 @@ import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 
 public class IndexOperationsTest extends AbstractIndicesServiceTests {
     private static final Logger log = LoggerFactory.getLogger(IndexOperationsTest.class);
-    private static final String PRODUCTS_INDEX = "products";
+    private static final String REVIEWS_INDEX = "reviews";
 
     @Autowired
     private ElasticsearchOperations elasticsearchOperations;
 
     @Test
     public void createIndex() {
-        IndexOperations indexOperations = this.elasticsearchOperations.indexOps(IndexCoordinates.of(PRODUCTS_INDEX));
+        IndexOperations indexOperations = this.elasticsearchOperations.indexOps(IndexCoordinates.of(REVIEWS_INDEX));
         Assertions.assertTrue(indexOperations.create());
         verify(indexOperations, 1, 1);
     }
 
     @Test
     public void createIndexWithSettings() {
-        IndexOperations indexOperations = this.elasticsearchOperations.indexOps(Product.class);
+        IndexOperations indexOperations = this.elasticsearchOperations.indexOps(Reviews.class);
         Assertions.assertTrue(indexOperations.create());
         verify(indexOperations, 2, 2);
     }
