@@ -8,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
     private static final Logger log = LoggerFactory.getLogger(CrudProductOperationsTest.class);
 
@@ -40,6 +44,52 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
 
         repository.deleteById(product.getId());
         Assertions.assertFalse(repository.existsById(product.getId()));
+    }
+
+    @Test
+    public void buildCrud() {
+        List<Product> list = IntStream.rangeClosed(1, 10)
+                .mapToObj(i -> createProduct("product-" + i, "description-" + i,
+                        "category-" + i, "brand-" + i, i * 10, i))
+                .toList();
+        repository.saveAll(list);
+        printAll();
+        Assertions.assertEquals(10, repository.count());
+
+        List<Integer> findList = List.of(2, 4, 6);
+        list = findList.stream()
+                .flatMap(i ->
+                        repository
+                                .findAllByTitleAndCategory(
+                                        "product-" + i,
+                                        "category-" + i
+                                )
+                                .stream()
+                )
+                .toList();
+        printAll();
+        Assertions.assertEquals(3, list.size());
+
+        List<String> ids = new ArrayList<>();
+        list.forEach(p -> p.setPrice(p.getPrice() * 2)); // mutable object
+        this.repository.saveAll(list);
+        printAll();
+        findList.stream()
+                .flatMap(i ->
+                        repository.findAllByTitleAndCategory(
+                                        "product-" + i,
+                                        "category-" + i
+                                )
+                                .stream()
+                ).forEach(p -> {
+                    ids.add(p.getId());
+                    Assertions.assertEquals(p.getPrice() / 20, p.getInStock());
+                });
+        printAll();
+
+        repository.deleteAllById(ids);
+        Assertions.assertEquals(7, repository.count());
+        printAll();
     }
 
     private Product createProduct(String title, String description,
