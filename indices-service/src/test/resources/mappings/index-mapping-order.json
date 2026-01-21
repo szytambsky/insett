@@ -1,0 +1,20 @@
+{
+  "properties": {
+    "paymentStatus": {
+      "type": "keyword"
+    },
+    "orderStatus": {
+      "type": "keyword"
+    },
+    "orderNumber": {
+      "type": "keyword"
+    },
+    "totalAmount": {
+      "type": "scaled_float",
+      "scaling_factor": 100
+    },
+    "billingAddress": {
+      "type": "text"
+    }
+  }
+}

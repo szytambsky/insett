@@ -1,0 +1,82 @@
+[
+  {
+    "orderId": "ORD-001",
+    "orderNumber": "2024-0001",
+    "paymentStatus": "PAID",
+    "orderStatus": "CREATED",
+    "totalAmount": 199.99,
+    "billingAddress": "Main Street 12, New York, USA"
+  },
+  {
+    "orderId": "ORD-002",
+    "orderNumber": "2024-0002",
+    "paymentStatus": "PAID",
+    "orderStatus": "PROCESSING",
+    "totalAmount": 349.50,
+    "billingAddress": "Oak Avenue 45, San Francisco, USA"
+  },
+  {
+    "orderId": "ORD-003",
+    "orderNumber": "2024-0003",
+    "paymentStatus": "PENDING",
+    "orderStatus": "CREATED",
+    "totalAmount": 89.90,
+    "billingAddress": "Pine Road 7, Seattle, USA"
+  },
+  {
+    "orderId": "ORD-004",
+    "orderNumber": "2024-0004",
+    "paymentStatus": "FAILED",
+    "orderStatus": "CANCELLED",
+    "totalAmount": 120.00,
+    "billingAddress": "Elm Street 99, Chicago, USA"
+  },
+  {
+    "orderId": "ORD-005",
+    "orderNumber": "2024-0005",
+    "paymentStatus": "PAID",
+    "orderStatus": "SHIPPED",
+    "totalAmount": 560.75,
+    "billingAddress": "Sunset Boulevard 101, Los Angeles, USA"
+  },
+  {
+    "orderId": "ORD-006",
+    "orderNumber": "2024-0006",
+    "paymentStatus": "PAID",
+    "orderStatus": "DELIVERED",
+    "totalAmount": 999.99,
+    "billingAddress": "Broadway 1, New York, USA"
+  },
+  {
+    "orderId": "ORD-007",
+    "orderNumber": "2024-0007",
+    "paymentStatus": "REFUNDED",
+    "orderStatus": "RETURNED",
+    "totalAmount": 249.00,
+    "billingAddress": "Market Street 22, San Jose, USA"
+  },
+  {
+    "orderId": "ORD-008",
+    "orderNumber": "2024-0008",
+    "paymentStatus": "PAID",
+    "orderStatus": "PROCESSING",
+    "totalAmount": 430.20,
+    "billingAddress": "King Street 15, Toronto, Canada"
+  },
+  {
+    "orderId": "ORD-009",
+    "orderNumber": "2024-0009",
+    "paymentStatus": "PENDING",
+    "orderStatus": "CREATED",
+    "totalAmount": 75.00,
+    "billingAddress": "Queen Street 88, London, UK"
+  },
+  {
+    "orderId": "ORD-010",
+    "orderNumber": "2024-0010",
+    "paymentStatus": "PAID",
+    "orderStatus": "DELIVERED",
+    "totalAmount": 1500.00,
+    "billingAddress": "Alexanderplatz 3, Berlin, Germany"
+  }
+]
