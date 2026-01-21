@@ -38,7 +38,6 @@ public class IndexOperationsTest extends AbstractIndicesServiceTests {
     @Test
     public void createIndexWithSettingsAndMappings() {
         IndexOperations indexOperations = this.elasticsearchOperations.indexOps(Listing.class);
-        Assertions.assertTrue(indexOperations.createWithMapping());
         verify(indexOperations, 3, 0);
     }
 

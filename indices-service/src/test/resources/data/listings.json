@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "brand": "Logitech",
+    "price": 40,
+    "inStock": 50
+  },
+  {
+    "id": "2",
+    "name": "Electronic Mechanical Keyboard",
+    "category": "Electronics",
+    "brand": "Electronics",
+    "price": 120,
+    "inStock": 25
+  },
+  {
+    "id": "3",
+    "name": "Office Desk",
+    "category": "Furniture",
+    "brand": "Ikea",
+    "price": 300,
+    "inStock": 10
+  },
+  {
+    "id": "4",
+    "name": "Gaming Chair",
+    "category": "Furniture",
+    "brand": "DXRacer",
+    "price": 450,
+    "inStock": 7
+  },
+  {
+    "id": "5",
+    "name": "Smartphone Stand",
+    "category": "Accessories",
+    "brand": "Ugreen",
+    "price": 15,
+    "inStock": 100
+  },
+  {
+    "id": "6",
+    "name": "Noise Cancelling Earbuds",
+    "category": "Electronics",
+    "brand": "Sony",
+    "price": 180,
+    "inStock": 20
+  },
+  {
+    "id": "7",
+    "name": "LED Desk Lamp",
+    "category": "Home",
+    "brand": "Philips",
+    "price": 60,
+    "inStock": 35
+  },
+  {
+    "id": "8",
+    "name": "Fitness Smart Band",
+    "category": "Electronics",
+    "brand": "Xiaomi",
+    "price": 70,
+    "inStock": 40
+  },
+  {
+    "id": "9",
+    "name": "Backpack 20L",
+    "category": "Travel",
+    "brand": "Osprey",
+    "price": 110,
+    "inStock": 15
+  },
+  {
+    "id": "10",
+    "name": "Stainless Steel Water Bottle",
+    "category": "Outdoors",
+    "brand": "Hydro Flask",
+    "price": 35,
+    "inStock": 60
+  }
+]

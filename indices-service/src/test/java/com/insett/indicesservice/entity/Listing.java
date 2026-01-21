@@ -6,8 +6,8 @@ import org.springframework.data.elasticsearch.annotations.Mapping;
 import org.springframework.data.elasticsearch.annotations.Setting;
 
 @Document(indexName = "listings")
-@Setting(settingPath = "indices/index-setting.json")
-@Mapping(mappingPath = "indices/index-mapping.json")
+@Setting(settingPath = "settings/index-setting-listing.json")
+@Mapping(mappingPath = "mappings/index-mapping-listing.json")
 public class Listing {
     @Id
     private String id;

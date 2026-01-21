@@ -3,14 +3,13 @@ package com.insett.indicesservice.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Mapping;
-import org.springframework.data.elasticsearch.annotations.Setting;
 
 /**
 *    our goal here is to verify the creation of index with the below setting.
 *    that is why, entity class does not have any other properties
 **/
 @Document(indexName = "products")
-@Mapping(mappingPath = "indices/index-mapping-product.json")
+@Mapping(mappingPath = "mappings/index-mapping-product.json")
 public class Product {
     @Id
     private String id;
