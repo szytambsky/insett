@@ -3,6 +3,7 @@ package com.insett.indicesservice;
 import com.insett.indicesservice.domain.dao.ProductRepository;
 import com.insett.indicesservice.entity.Product;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,11 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
     @Autowired
     private ProductRepository repository;
 
+    @BeforeEach
+    public void deleteAndRefreshEsDb() {
+        repository.deleteAll();
+    }
+
     @Test
     public void crudOperations() {
         var givenTitle = "Riftbound Origin Box";
@@ -30,7 +36,7 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
 
         repository.save(product);
         printAll();
-        product = repository.findProductByTitleAndBrand(givenTitle, givenBrand).orElseThrow();
+        product = repository.findByTitleAndBrand(givenTitle, givenBrand).orElseThrow();
         Assertions.assertEquals(givenTitle, product.getTitle());
         Assertions.assertEquals(givenDescription, product.getDescription());
         Assertions.assertEquals(givenPrice, product.getPrice());

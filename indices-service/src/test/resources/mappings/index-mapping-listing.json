@@ -1,0 +1,19 @@
+{
+  "properties": {
+    "name": {
+      "type" : "text"
+    },
+    "category": {
+      "type" : "keyword"
+    },
+    "brand":  {
+      "type" : "keyword"
+    },
+    "price":  {
+      "type" : "integer"
+    },
+    "in_stock": {
+      "type": "integer"
+    }
+  }
+}

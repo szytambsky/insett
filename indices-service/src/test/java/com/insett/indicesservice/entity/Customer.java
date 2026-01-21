@@ -5,7 +5,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Mapping;
 
 @Document(indexName = "customers")
-@Mapping(mappingPath = "indices/index-mapping-customer.json")
+@Mapping(mappingPath = "mappings/index-mapping-customer.json")
 public class Customer {
     @Id
     private String id;
