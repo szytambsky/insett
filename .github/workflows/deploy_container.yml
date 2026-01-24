@@ -1,0 +1,33 @@
+name: Deploy single module application
+on:
+  workflow_dispatch:
+    inputs:
+      applicationName:
+        description: Name and Version of application to deploy
+        type: string
+        required: true
+      isTestOnly:
+        description: Sets as test container
+        type: boolean
+        required: false
+        default: false
+jobs:
+  deploy-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote SSH commands using SSH key
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            whoami
+            hostname
+            uptime
+            ls -la
+      - name: Run simple commands on runner
+        run: |
+          echo "Building app - ${{ github.event.inputs.applicationName }} 
+          echo "for test env - ${{ github.event.inputs.isTestOnly }}
