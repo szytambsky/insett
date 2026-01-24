@@ -27,8 +27,6 @@ jobs:
       - name: Build with Maven
         working-directory: indices-service
         run: mvn -B package --file pom.xml
-      - name: Prepare artifacts
-        run: mkdir staging && cp target/*.jar staging
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
