@@ -24,14 +24,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 21
-        if: matrix.service == 'warehouse-service'
+        if: matrix.service == 'indices-service'
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: temurin
 
       - name: Set up JDK 24
-        if: matrix.service == 'indices-service'
+        if: matrix.service == 'warehouse-service'
         uses: actions/setup-java@v4
         with:
           java-version: 24

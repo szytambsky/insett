@@ -26,14 +26,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 21
-        if: inputs.microservice == 'warehouse-service'
+        if: inputs.microservice == 'indices-service'
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: temurin
 
       - name: Set up JDK 24
-        if: inputs.microservice == 'indices-service'
+        if: inputs.microservice == 'warehouse-service'
         uses: actions/setup-java@v4
         with:
           java-version: 24
