@@ -17,3 +17,13 @@ up -d --build --force-recreate --remove-orphans
 docker compose -f elasticsearch/docker-compose-elastic.yml \
 up -d --build --force-recreate --remove-orphans
 ```
+
+```bash
+docker compose -f elasticsearch/docker-compose-es-data.yml \
+run --rm data-setup
+```
+
+```bash
+docker compose -f elasticsearch/docker-compose-es-data.yml \
+up -d --build --force-recreate --remove-orphans
+```

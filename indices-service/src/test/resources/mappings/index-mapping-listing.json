@@ -12,7 +12,7 @@
     "price":  {
       "type" : "integer"
     },
-    "in_stock": {
+    "inStock": {
       "type": "integer"
     }
   }

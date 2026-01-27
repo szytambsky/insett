@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: indices-service
+  elasticsearch:
+    uris: http://localhost:9200
