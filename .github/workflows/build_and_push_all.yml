@@ -1,4 +1,4 @@
-name: Build & Push Docker Images
+name: Build & Publish All
 run-name: Publish all from ${{ inputs.branch }}
 on:
   workflow_dispatch:

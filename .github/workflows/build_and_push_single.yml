@@ -1,4 +1,4 @@
-name: Build & Push Single
+name: Build & Publish Single
 run-name: Publish single ${{ inputs.microservice }} from ${{ inputs.branch }}
 on:
   workflow_dispatch:
