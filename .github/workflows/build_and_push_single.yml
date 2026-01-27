@@ -24,25 +24,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Set up JDK 21
-        if: inputs.microservice == 'indices-service'
-        uses: actions/setup-java@v4
         with:
-          java-version: 21
-          distribution: temurin
-
-      - name: Set up JDK 24
-        if: inputs.microservice == 'warehouse-service'
-        uses: actions/setup-java@v4
-        with:
-          java-version: 24
-          distribution: temurin
-
-
-      - name: Build JAR with Maven
-        working-directory: ${{ inputs.microservice }}
-        run: mvn -B clean package --file pom.xml
+          ref: ${{ inputs.branch }}
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -50,15 +33,21 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Extract metadata (tags, labels)
+
+      - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{ github.repository }}/${{ inputs.microservice }}
+          tags: |
+            type=ref,event=branch
+            type=sha
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: ./${{ inputs.microservice }}
+          file: ./${{ inputs.microservice }}/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
