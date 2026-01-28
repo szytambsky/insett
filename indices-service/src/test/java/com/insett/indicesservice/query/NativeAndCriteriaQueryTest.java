@@ -14,7 +14,7 @@ import co.elastic.clients.elasticsearch._types.query_dsl.TermQuery;
 import co.elastic.clients.elasticsearch.core.search.CompletionSuggester;
 import co.elastic.clients.elasticsearch.core.search.FieldSuggester;
 import co.elastic.clients.elasticsearch.core.search.Suggester;
-import com.fasterxml.jackson.core.type.TypeReference;
+import tools.jackson.core.type.TypeReference;
 import com.insett.indicesservice.AbstractIndicesServiceTests;
 import com.insett.indicesservice.domain.dao.GarmentRepository;
 import com.insett.indicesservice.entity.Garment;

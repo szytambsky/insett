@@ -1,8 +1,7 @@
 package com.insett.indicesservice;
 
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 import com.insett.indicesservice.exceptions.ResourceLoadException;
 import org.junit.jupiter.api.TestInstance;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.function.Consumer;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(TestcontainersConfiguration.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AbstractIndicesServiceTests {
