@@ -14,5 +14,4 @@ public record SuggestionRequestParameters(String prefix,
         }
         limit = Objects.requireNonNullElse(limit, 10);
     }
-
 }

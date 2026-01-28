@@ -2,6 +2,7 @@ package com.insett.indicesservice.domain.util;
 
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 
+// todo: - rewrite to enums or config files
 public class Constants {
 
     private Constants() {}
@@ -19,5 +20,19 @@ public class Constants {
     public static class Fuzziness {
         public static final String LEVEL = "1";
         public static final Integer PREFIX_LENGTH = 2;
+    }
+
+    public static class Business {
+        public static final String NAME = "name";
+        public static final String ADDRESS = "address";
+        public static final String DESCRIPTION = "description";
+        public static final String STATE = "state";
+        public static final String LOCATION = "location";
+        public static final String CATEGORY = "category";
+        public static final String CATEGORY_RAW = "category.raw";
+        public static final String OFFERINGS = "offerings";
+        public static final String OFFERINGS_RAW = "offerings.raw";
+        public static final String RATING = "avg_rating";
+        public static final String OFFERINGS_AGGREGATE_NAME = "offerings-term-aggregate";
     }
 }
