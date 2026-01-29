@@ -1,6 +1,7 @@
 package com.insett.indicesservice.domain.util;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ import static com.insett.indicesservice.domain.util.Constants.Business.STATE;
 
 public class QueryRules {
 
-    public static final String BOOST_FIELD_FORMAT = "%s^%f";
+    public static final String BOOST_FIELD_FORMAT = "%s^%.1f";
 
     public static final QueryRule STATE_QUERY = QueryRule.of(
             searchRequestParameters ->
@@ -70,7 +71,7 @@ public class QueryRules {
             srp -> ElasticsearchUtil.buildMultiMatchQuery(SEARCH_BOOST_FIELDS, srp.query())
     );
 
-    public static String boostField(String field, float boost) {
-        return BOOST_FIELD_FORMAT.formatted(field, boost);
+    private static String boostField(String field, float boost) {
+        return String.format(Locale.US, BOOST_FIELD_FORMAT, field, boost);
     }
 }

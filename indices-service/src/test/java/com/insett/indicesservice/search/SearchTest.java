@@ -55,7 +55,6 @@ public class SearchTest extends AbstractIndicesServiceTests {
         Assertions.assertEquals(10, searchHits.getTotalHits());
     }
 
-    @Disabled //todo: fix implementation
     @ParameterizedTest
     @MethodSource("successTestData")
     public void searchSuccessTest(String parameters, int expectedResultsCount) {
