@@ -10,7 +10,7 @@ public record SuggestionRequestParameters(String prefix,
 
     public SuggestionRequestParameters {
         if (!StringUtils.hasText(prefix)) {
-            throw new BadRequestException("Prefix cannot be empty");
+            throw new BadRequestException("prefix can not be empty");
         }
         limit = Objects.requireNonNullElse(limit, 10);
     }
