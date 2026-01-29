@@ -14,18 +14,18 @@ import java.util.Optional;
 
 public class NativeQueryBuilder {
 
-    public static final List<QueryRule> FILTER_QUERY_RULE = List.of(
+    private static final List<QueryRule> FILTER_QUERY_RULES = List.of(
             QueryRules.STATE_QUERY,
             QueryRules.RATING_QUERY,
             QueryRules.DISTANCE_QUERY,
             QueryRules.OFFERINGS_QUERY
     );
 
-    public static final List<QueryRule> MUST_QUERY_RULE = List.of(
-            QueryRules.SEARCH_MULTI_MATCH_QUERY
+    private static final List<QueryRule> MUST_QUERY_RULES = List.of(
+            QueryRules.SEARCH_QUERY
     );
 
-    public static final List<QueryRule> SHOULD_QUERY_RULE = List.of(
+    private static final List<QueryRule> SHOULD_QUERY_RULES = List.of(
             QueryRules.CATEGORY_QUERY
     );
 
@@ -40,9 +40,9 @@ public class NativeQueryBuilder {
     }
 
     public static NativeQuery toSearchQuery(SearchRequestParameters parameters) {
-        List<Query> filterQueries = buildQueries(FILTER_QUERY_RULE, parameters);
-        List<Query> mustQueries = buildQueries(MUST_QUERY_RULE, parameters);
-        List<Query> shouldQueries = buildQueries(SHOULD_QUERY_RULE, parameters);
+        List<Query> filterQueries = buildQueries(FILTER_QUERY_RULES, parameters);
+        List<Query> mustQueries = buildQueries(MUST_QUERY_RULES, parameters);
+        List<Query> shouldQueries = buildQueries(SHOULD_QUERY_RULES, parameters);
         BoolQuery boolQuery = BoolQuery.of(builder -> builder.filter(filterQueries)
                 .must(mustQueries)
                 .should(shouldQueries));

@@ -40,7 +40,7 @@ public class SearchService {
 
     public SearchResponse search(SearchRequestParameters parameters) {
         log.info("Search request: {}", parameters);
-        NativeQuery nativeQuery = NativeQueryBuilder.toSearchQuery(parameters);
+        NativeQuery nativeQuery = NativeQueryBuilder.toSearchQuery(parameters); // todo:
         log.info("Bool query: {}", nativeQuery);
         SearchHits<Business> searchHits = elasticsearchOperations.search(nativeQuery, Business.class, Constants.Index.BUSINESS);
         return buildSearchResponse(parameters, searchHits);

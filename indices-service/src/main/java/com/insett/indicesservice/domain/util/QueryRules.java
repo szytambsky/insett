@@ -65,7 +65,7 @@ public class QueryRules {
             DESCRIPTION
     );
 
-    public static final QueryRule SEARCH_MULTI_MATCH_QUERY = QueryRule.of(
+    public static final QueryRule SEARCH_QUERY = QueryRule.of(
             srp -> Objects.nonNull(srp.query()),
             srp -> ElasticsearchUtil.buildMultiMatchQuery(SEARCH_BOOST_FIELDS, srp.query())
     );
