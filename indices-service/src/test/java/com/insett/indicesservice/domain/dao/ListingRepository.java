@@ -21,6 +21,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ListingRepository extends ElasticsearchRepository<Listing, String> {
 
+    /**
+     * Searches Listing documents using a multi-field fuzzy match and returns matching hits with name highlights.
+     *
+     * Performs a search against the listing's searchable fields (name and brand) using the provided query text.
+     *
+     * @param query the search text used to match Listing fields
+     * @return SearchHits containing the matching Listing documents; highlight fragments for the `name` field are included when available
+     */
     @Query("""
             {
                 "multi_match": {

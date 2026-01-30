@@ -71,6 +71,13 @@ public class QueryRules {
             srp -> ElasticsearchUtil.buildMultiMatchQuery(SEARCH_BOOST_FIELDS, srp.query())
     );
 
+    /**
+     * Format a field boost expression using the US locale.
+     *
+     * @param field the field name to boost
+     * @param boost the boost value to apply (e.g., 1.5)
+     * @return the boost expression in the form "field^boost" (boost formatted using US locale with one decimal place)
+     */
     private static String boostField(String field, float boost) {
         return String.format(Locale.US, BOOST_FIELD_FORMAT, field, boost);
     }
