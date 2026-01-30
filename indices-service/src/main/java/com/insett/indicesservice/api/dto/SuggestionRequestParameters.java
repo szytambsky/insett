@@ -8,10 +8,16 @@ import java.util.Objects;
 public record SuggestionRequestParameters(String prefix,
                                           Integer limit) {
 
+    private static final int DEFAULT_LIMIT = 10;
+    private static final int MAX_LIMIT = 50;
+
     public SuggestionRequestParameters {
         if (!StringUtils.hasText(prefix)) {
             throw new BadRequestException("prefix can not be empty");
         }
-        limit = Objects.requireNonNullElse(limit, 10);
+        limit = Objects.requireNonNullElse(limit, DEFAULT_LIMIT);
+        if (limit < 0 || limit > MAX_LIMIT) {
+            throw new BadRequestException("limit must be between 1 and " + MAX_LIMIT);
+        }
     }
 }

@@ -50,7 +50,7 @@ public class Customer {
         return "Customer{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
+                ", email='[redacted]'" +
                 ", age=" + age +
                 '}';
     }

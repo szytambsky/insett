@@ -57,20 +57,26 @@ public class SearchService {
                 searchPage.getNumberOfElements(),
                 searchPage.getTotalElements(),
                 searchPage.getTotalPages());
-        List<Facet> facets = buildFacets((List<ElasticsearchAggregation>) searchHits.getAggregations().aggregations());
+        var aggregations = searchHits.getAggregations();
+        List<Facet> facets = buildFacets(aggregations != null ? (List<ElasticsearchAggregation>) aggregations.aggregations() : List.of());
         return new SearchResponse(results, facets, pagination, searchHits.getExecutionDuration().toMillis());
     }
 
     private List<Facet> buildFacets(List<ElasticsearchAggregation> aggregations) {
+        if (aggregations == null || aggregations.isEmpty()) {
+            return List.of();
+        }
         Map<String, Aggregate> map = aggregations.stream()
                 .map(ElasticsearchAggregation::aggregation)
                 .collect(Collectors.toMap(
                         singleFacet -> singleFacet.getName(),
                         singleFacet -> singleFacet.getAggregate()
                 ));
-        return List.of(
-                buildFacet(OFFERINGS_AGGREGATE_NAME, map.get(OFFERINGS_AGGREGATE_NAME).sterms())
-        );
+        Aggregate offeringsAgg = map.get(OFFERINGS_AGGREGATE_NAME);
+        if (offeringsAgg == null || !offeringsAgg.isSterms()) {
+            return List.of();
+        }
+        return List.of(buildFacet(OFFERINGS_AGGREGATE_NAME, offeringsAgg.sterms()));
     }
 
     private Facet buildFacet(String name, StringTermsAggregate stringTermsAggregate) {

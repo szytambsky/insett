@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface ProductRepository extends ElasticsearchRepository<Product, String> {
     Optional<Product> findByTitleAndBrand(String title, String brand);
 
-    List<Product> findAllByTitleAndCategory(String title, String brand);
+    List<Product> findAllByTitleAndCategory(String title, String category);
 
     SearchHits<Product> findByTitle(String name);
 

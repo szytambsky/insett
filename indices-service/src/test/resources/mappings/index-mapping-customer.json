@@ -1,6 +1,6 @@
 {
   "properties": {
-    "name": {
+    "username": {
       "type" : "text"
     },
     "email":  {

@@ -10,5 +10,5 @@ public class OrderItemList {
     private BigDecimal quantity;
     private BigDecimal purchasePrice;
     private String sku;
-    private String OrderItemStatus; //(PENDING, RESERVED, FULFILLED, CANCELLED)
+    private String orderItemStatus; //(PENDING, RESERVED, FULFILLED, CANCELLED)
 }
