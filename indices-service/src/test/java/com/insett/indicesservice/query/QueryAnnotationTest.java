@@ -31,6 +31,7 @@ public class QueryAnnotationTest extends AbstractIndicesServiceTests {
         List<Listing> listings
                 = super.readResource("data/listings.json", new TypeReference<List<Listing>>() {});
         repository.saveAll(listings);
+        operations.indexOps(Listing.class).refresh();
         Assertions.assertEquals(10, this.repository.count());
     }
 

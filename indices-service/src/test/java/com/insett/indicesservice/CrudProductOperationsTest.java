@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,13 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
     @Autowired
     private ProductRepository repository;
 
+    @Autowired
+    private ElasticsearchOperations elasticsearchOperations;
+
     @BeforeEach
     public void deleteAndRefreshEsDb() {
         repository.deleteAll();
+        elasticsearchOperations.indexOps(Product.class).refresh();
     }
 
     @Test

@@ -14,7 +14,7 @@ public class ProductCategory {
     private String categoryName;
 
     @Field(type = FieldType.Integer)
-    private Integer ordinalType;
+    private Integer categoryType;
 
     public String getId() {
         return id;
@@ -33,10 +33,10 @@ public class ProductCategory {
     }
 
     public Integer getCategoryType() {
-        return ordinalType;
+        return categoryType;
     }
 
-    public void setCategoryType(Integer ordinalType) {
-        this.ordinalType = ordinalType;
+    public void setCategoryType(Integer categoryType) {
+        this.categoryType = categoryType;
     }
 }

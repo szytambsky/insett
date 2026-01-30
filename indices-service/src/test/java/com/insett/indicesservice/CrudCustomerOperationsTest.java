@@ -7,12 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 public class CrudCustomerOperationsTest extends AbstractIndicesServiceTests {
     private static final Logger log = LoggerFactory.getLogger(CrudCustomerOperationsTest.class);
 
     @Autowired
     private CustomerRepository repository;
+
+    @Autowired
+    ElasticsearchOperations elasticsearchOperations;
 
     @Test
     public void crudOperations() {
@@ -22,6 +26,7 @@ public class CrudCustomerOperationsTest extends AbstractIndicesServiceTests {
         Customer customer = createCustomer(givenName, givenEmail, givenAge);
 
         repository.save(customer);
+        elasticsearchOperations.indexOps(Customer.class).refresh();
         printAll();
         customer = repository.findCustomerByUsernameAndEmail(givenName, givenEmail).orElseThrow();
         Assertions.assertEquals(givenName, customer.getUsername());
@@ -34,6 +39,7 @@ public class CrudCustomerOperationsTest extends AbstractIndicesServiceTests {
         Assertions.assertEquals(30, customer.getAge());
 
         repository.deleteById(customer.getId());
+        elasticsearchOperations.indexOps(Customer.class).refresh();
         Assertions.assertFalse(repository.existsById(customer.getId()));
     }
 

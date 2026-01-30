@@ -51,6 +51,7 @@ public class NativeAndCriteriaQueryTest extends AbstractIndicesServiceTests {
                 = super.readResource("data/garments.json", new TypeReference<List<Garment>>() {
         });
         repository.saveAll(garments);
+        operations.indexOps(Garment.class).refresh();
         Assertions.assertEquals(20, repository.count());
     }
 

@@ -34,7 +34,7 @@ public class AbstractIndicesServiceTests {
             File file = this.resourceLoader.getResource(classpath).getFile();
             return mapper.readValue(file, typeReference);
         } catch (IOException e) {
-            throw new ResourceLoadException("Could not load resource for type: " + typeReference.getType(), e.getCause());
+            throw new ResourceLoadException("Could not load resource for type: " + typeReference.getType(), e);
         }
     }
 

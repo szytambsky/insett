@@ -34,6 +34,7 @@ public class QueryMethodsTest extends AbstractIndicesServiceTests {
         List<Product> products = super.readResource("data/products.json", new TypeReference<List<Product>>() {
         });
         this.repository.saveAll(products);
+        operations.indexOps(Product.class).refresh();
         Assertions.assertEquals(20, this.repository.count());
     }
 

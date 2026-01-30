@@ -41,12 +41,15 @@ public class IndexOperationsTest extends AbstractIndicesServiceTests {
     }
 
     private void verify(IndexOperations indexOperations, int expectedNumberOfShards, int expectedNumberOfReplicas) {
-        Settings settings = indexOperations.getSettings();
-        log.info("Settings: {}", settings);
-        log.info("mapping: {}", indexOperations.getMapping());
-        Assertions.assertEquals(String.valueOf(expectedNumberOfShards), settings.get("index.number_of_shards"));
-        Assertions.assertEquals(String.valueOf(expectedNumberOfReplicas), settings.get("index.number_of_replicas"));
-        deleteIndex(indexOperations);
+        try {
+            Settings settings = indexOperations.getSettings();
+            log.info("Settings: {}", settings);
+            log.info("mapping: {}", indexOperations.getMapping());
+            Assertions.assertEquals(String.valueOf(expectedNumberOfShards), settings.get("index.number_of_shards"));
+            Assertions.assertEquals(String.valueOf(expectedNumberOfReplicas), settings.get("index.number_of_replicas"));
+        } finally {
+            deleteIndex(indexOperations);
+        }
     }
 
     private void deleteIndex(IndexOperations indexOperations) {
