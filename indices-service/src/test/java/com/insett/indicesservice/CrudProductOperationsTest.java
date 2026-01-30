@@ -12,6 +12,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
@@ -32,7 +33,7 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
     @Test
     public void crudOperations() {
         var givenTitle = "Riftbound Origin Box";
-        var givenDescription = "sam.cards@gmail.com";
+        var givenDescription = "sam.cards@example.com";
         var givenCategory = "TCG - Trading Card Games";
         var givenBrand = "Riot";
         var givenPrice = 129;
@@ -40,6 +41,7 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
         Product product = createProduct(givenTitle, givenDescription, givenCategory, givenBrand, givenPrice, givenStockQuantity);
 
         repository.save(product);
+        elasticsearchOperations.indexOps(Product.class).refresh();
         printAll();
         product = repository.findByTitleAndBrand(givenTitle, givenBrand).orElseThrow();
         Assertions.assertEquals(givenTitle, product.getTitle());
@@ -64,6 +66,7 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
                         "category-" + i, "brand-" + i, i * 10, i))
                 .toList();
         repository.saveAll(list);
+        elasticsearchOperations.indexOps(Product.class).refresh();
         printAll();
         Assertions.assertEquals(10, repository.count());
 
@@ -82,8 +85,10 @@ public class CrudProductOperationsTest extends AbstractIndicesServiceTests {
         Assertions.assertEquals(3, list.size());
 
         List<String> ids = new ArrayList<>();
-        list.forEach(p -> p.setPrice(p.getPrice() * 2)); // mutable object
+        Function<Integer, Integer> doublingThePrice = price -> {  return price * 2; };
+        list.forEach(p -> p.setPrice(doublingThePrice.apply(p.getPrice())));
         this.repository.saveAll(list);
+        elasticsearchOperations.indexOps(Product.class).refresh();
         printAll();
         findList.stream()
                 .flatMap(i ->

@@ -39,4 +39,13 @@ public class ProductCategory {
     public void setCategoryType(Integer categoryType) {
         this.categoryType = categoryType;
     }
+
+    @Override
+    public String toString() {
+        return "ProductCategory{" +
+                "id='" + id + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", categoryType=" + categoryType +
+                '}';
+    }
 }

@@ -21,7 +21,7 @@ public class CrudCustomerOperationsTest extends AbstractIndicesServiceTests {
     @Test
     public void crudOperations() {
         var givenName = "SamCards";
-        var givenEmail = "sam.cards@gmail.com";
+        var givenEmail = "sam.cards@example.com";
         var givenAge = 28;
         Customer customer = createCustomer(givenName, givenEmail, givenAge);
 
@@ -53,6 +53,6 @@ public class CrudCustomerOperationsTest extends AbstractIndicesServiceTests {
 
     private void printAll() {
         repository.findAll()
-                .forEach(customer -> log.info("customer: {}", customer));
+                .forEach(customer -> log.info("customer: {}", customer.getId()));
     }
 }

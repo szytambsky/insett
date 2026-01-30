@@ -17,8 +17,6 @@ import java.util.List;
 
 public class QueryAnnotationTest extends AbstractIndicesServiceTests {
 
-    private static final Logger log = LoggerFactory.getLogger(QueryAnnotationTest.class);
-
     @Autowired
     private ListingRepository repository;
 
