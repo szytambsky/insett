@@ -29,6 +29,12 @@ public class NativeQueryBuilder {
             QueryRules.CATEGORY_QUERY
     );
 
+    /**
+     * Builds a NativeQuery configured for autocomplete suggestions using the provided parameters.
+     *
+     * @param parameters request parameters containing the suggestion prefix and result limit
+     * @return a NativeQuery containing a completion suggester named for suggestions, with no search hits returned and the source excluded
+     */
     public static NativeQuery toSuggestQuery(SuggestionRequestParameters parameters) {
         Suggester suggester = ElasticsearchUtil.buildCompletionSuggester(Constants.Suggestion.SUGGEST_NAME,
                 Constants.Suggestion.SEARCH_TERM, parameters.prefix(), parameters.limit());
@@ -39,6 +45,16 @@ public class NativeQueryBuilder {
                 .build();
     }
 
+    /**
+     * Builds an Elasticsearch NativeQuery for searching businesses using the provided request parameters.
+     *
+     * The resulting query uses a boolean query composed of filter, must, and should clauses derived from the request
+     * parameters and predefined rule sets, includes a terms aggregation for offerings, applies pagination from the
+     * request, and enables total hit tracking.
+     *
+     * @param parameters the search request parameters (controls filters, pagination, and other query options)
+     * @return a configured NativeQuery containing the boolean query, offerings aggregation, pagination, and trackTotalHits enabled
+     */
     public static NativeQuery toSearchQuery(SearchRequestParameters parameters) {
         List<Query> filterQueries = buildQueries(FILTER_QUERY_RULES, parameters);
         List<Query> mustQueries = buildQueries(MUST_QUERY_RULES, parameters);
@@ -55,6 +71,15 @@ public class NativeQueryBuilder {
                 .build();
     }
 
+    /**
+     * Convert a list of QueryRule objects into concrete Query instances using the provided search parameters.
+     *
+     * Filters out any rules that do not produce a query.
+     *
+     * @param queryRules the rules to evaluate
+     * @param parameters the search parameters used when building each rule's query
+     * @return a list of Query objects produced by the rules; empty if no rule produced a query
+     */
     private static List<Query> buildQueries(List<QueryRule> queryRules, SearchRequestParameters parameters) {
         return queryRules.stream()
                 .map(queryRule -> queryRule.build(parameters))

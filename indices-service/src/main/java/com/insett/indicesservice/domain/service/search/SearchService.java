@@ -38,6 +38,12 @@ public class SearchService {
 
     private final ElasticsearchOperations elasticsearchOperations;
 
+    /**
+     * Execute a search using the given request parameters and return a structured response.
+     *
+     * @param parameters search criteria including filters, pagination, and sorting
+     * @return a SearchResponse containing matching Business results, computed facets, pagination metadata, and the query execution duration in milliseconds
+     */
     public SearchResponse search(SearchRequestParameters parameters) {
         log.info("Search request: {}", parameters);
         NativeQuery nativeQuery = NativeQueryBuilder.toSearchQuery(parameters);
@@ -46,6 +52,16 @@ public class SearchService {
         return buildSearchResponse(parameters, searchHits);
     }
 
+    /**
+     * Builds a SearchResponse from raw search hits and the original request parameters.
+     *
+     * Assembles the list of Business results, pagination information (derived from the requested page and size),
+     * facets extracted from aggregations, and the search execution duration in milliseconds.
+     *
+     * @param parameters request parameters used to determine pagination (page and size)
+     * @param searchHits raw search hits and aggregations returned by Elasticsearch
+     * @return a SearchResponse containing the results, facets, pagination, and execution duration in milliseconds
+     */
     private SearchResponse buildSearchResponse(SearchRequestParameters parameters, SearchHits<Business> searchHits) {
         List<Business> results = searchHits.getSearchHits()
                 .stream()
@@ -61,6 +77,13 @@ public class SearchService {
         return new SearchResponse(results, facets, pagination, searchHits.getExecutionDuration().toMillis());
     }
 
+    /**
+     * Convert Elasticsearch aggregations into a list of Facet objects.
+     *
+     * @param aggregations the aggregations returned with search hits
+     * @return a list of facets; currently contains the facet for {@code OFFERINGS_AGGREGATE_NAME}
+     *         created from its string terms aggregation
+     */
     private List<Facet> buildFacets(List<ElasticsearchAggregation> aggregations) {
         Map<String, Aggregate> map = aggregations.stream()
                 .map(ElasticsearchAggregation::aggregation)
@@ -73,6 +96,14 @@ public class SearchService {
         );
     }
 
+    /**
+     * Builds a Facet from a string terms aggregation by converting each aggregation bucket
+     * into a FacetItem and grouping them under the given facet name.
+     *
+     * @param name the facet name to assign to the resulting Facet
+     * @param stringTermsAggregate the string terms aggregation containing buckets of term keys and document counts
+     * @return a Facet containing FacetItems derived from the aggregation buckets
+     */
     private Facet buildFacet(String name, StringTermsAggregate stringTermsAggregate) {
         List<FacetItem> facets = stringTermsAggregate.buckets()
                 .array()

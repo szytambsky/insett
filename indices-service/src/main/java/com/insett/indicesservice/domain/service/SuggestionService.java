@@ -25,6 +25,14 @@ public class SuggestionService {
 
     private final ElasticsearchOperations elasticsearchOperations;
 
+    /**
+     * Fetches suggestion texts from the suggestions index based on the provided parameters.
+     *
+     * <p>If the underlying search contains no suggestions, an empty list is returned.</p>
+     *
+     * @param parameters request parameters that control suggestion generation (query text, size, etc.)
+     * @return a list of suggestion strings; empty if no suggestions are present
+     */
     public List<String> fetchSuggestions(SuggestionRequestParameters parameters) {
         log.info("suggestion request: {}", parameters);
         NativeQuery query = NativeQueryBuilder.toSuggestQuery(parameters);

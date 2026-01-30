@@ -5,7 +5,10 @@ import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 // todo: - rewrite to enums or config files
 public class Constants {
 
-    private Constants() {}
+    /**
+ * Prevents instantiation of this utility class.
+ */
+private Constants() {}
 
     public static class Index {
         public static final IndexCoordinates SUGGESTION = IndexCoordinates.of("suggestions");
