@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Setting;
 
 @Document(indexName = "reviews")
 @Setting(shards = 2, replicas = 2)
-public class Reviews {
+public class Review {
     @Id
     private String id;
 
@@ -16,5 +16,12 @@ public class Reviews {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id='" + id + '\'' +
+                '}';
     }
 }

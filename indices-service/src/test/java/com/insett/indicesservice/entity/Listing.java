@@ -64,4 +64,16 @@ public class Listing {
     public void setInStock(Integer inStock) {
         this.inStock = inStock;
     }
+
+    @Override
+    public String toString() {
+        return "Listing{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", inStock=" + inStock +
+                '}';
+    }
 }

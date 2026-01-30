@@ -21,5 +21,8 @@ public record SearchRequestParameters(String query,
         }
         page = Objects.requireNonNullElse(page, 0);
         size = Objects.requireNonNullElse(size, 10);
+        if (size > 100) {
+            throw new BadRequestException("size cannot exceed 100");
+        }
     }
 }

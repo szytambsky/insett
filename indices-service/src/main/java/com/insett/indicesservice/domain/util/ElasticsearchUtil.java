@@ -22,6 +22,8 @@ import java.util.function.UnaryOperator;
 
 public class ElasticsearchUtil {
 
+    private ElasticsearchUtil() {}
+
     public static Suggester buildCompletionSuggester(String suggestName, String field, String prefix, int limit) {
         SuggestFuzziness suggestFuzziness = SuggestFuzziness.of(suggFuzzBuilder -> suggFuzzBuilder.fuzziness(Constants.Fuzziness.LEVEL)
                 .prefixLength(Constants.Fuzziness.PREFIX_LENGTH));
@@ -70,7 +72,8 @@ public class ElasticsearchUtil {
     }
 
     public static Aggregation buildTermsAggregation(String field) {
-        TermsAggregation termsAggregation = TermsAggregation.of(builder -> builder.field(field).size(10));
+        TermsAggregation termsAggregation = TermsAggregation.of(builder -> builder.field(field)
+                .size(Constants.Size.AGGREGATION_BUCKETS_LIMIT));
         return Aggregation.of(builder -> builder.terms(termsAggregation));
     }
 }

@@ -5,9 +5,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Mapping;
 
 /**
-*    our goal here is to verify the creation of index with the below setting.
-*    that is why, entity class does not have any other properties
-**/
+ + * Elasticsearch-backed entity for products index.
+ + * Uses external mapping from mappings/index-mapping-product.json.
+ + */
 @Document(indexName = "products")
 @Mapping(mappingPath = "mappings/index-mapping-product.json")
 public class Product {

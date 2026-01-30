@@ -1,7 +1,7 @@
 package com.insett.indicesservice;
 
 import com.insett.indicesservice.entity.ProductCategory;
-import com.insett.indicesservice.entity.Reviews;
+import com.insett.indicesservice.entity.Review;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class IndexOperationsTest extends AbstractIndicesServiceTests {
 
     @Test
     public void createIndexWithSettings() {
-        IndexOperations indexOperations = this.elasticsearchOperations.indexOps(Reviews.class);
+        IndexOperations indexOperations = this.elasticsearchOperations.indexOps(Review.class);
         Assertions.assertTrue(indexOperations.create());
         verify(indexOperations, 2, 2);
     }

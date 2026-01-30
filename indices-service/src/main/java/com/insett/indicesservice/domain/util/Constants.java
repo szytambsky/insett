@@ -3,26 +3,30 @@ package com.insett.indicesservice.domain.util;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 
 // todo: - rewrite to enums or config files
-public class Constants {
+public final class Constants {
 
     private Constants() {}
 
-    public static class Index {
+    public static final class Index {
+        private Index() {}
         public static final IndexCoordinates SUGGESTION = IndexCoordinates.of("suggestions");
         public static final IndexCoordinates BUSINESS = IndexCoordinates.of("businesses");
     }
 
-    public static class Suggestion {
+    public static final class Suggestion {
+        private Suggestion() {}
         public static final String SEARCH_TERM = "search_term";
         public static final String SUGGEST_NAME = "search-term-suggest";
     }
 
-    public static class Fuzziness {
+    public static final class Fuzziness {
+        private Fuzziness() {}
         public static final String LEVEL = "1";
         public static final Integer PREFIX_LENGTH = 2;
     }
 
-    public static class Business {
+    public static final class Business {
+        private Business() {}
         public static final String NAME = "name";
         public static final String ADDRESS = "address";
         public static final String DESCRIPTION = "description";
@@ -35,4 +39,10 @@ public class Constants {
         public static final String RATING = "avg_rating";
         public static final String OFFERINGS_AGGREGATE_NAME = "offerings-term-aggregate";
     }
+
+    public static final class Size {
+        private Size() {}
+        public static final Integer AGGREGATION_BUCKETS_LIMIT = 10;
+    }
+
 }

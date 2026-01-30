@@ -58,7 +58,7 @@ public class QueryMethodsTest extends AbstractIndicesServiceTests {
     }
 
     @Test
-    public void findByTitleAndCategory() {
+    public void findByCategoryAndBrand() {
         SearchHits<Product> searchHits = this.repository.findByCategoryAndBrand("Furniture", "Ikea");
         searchHits.forEach(super.print());
         Assertions.assertEquals(2, searchHits.getTotalHits());
