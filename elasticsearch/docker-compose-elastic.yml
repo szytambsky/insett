@@ -1,6 +1,16 @@
 services:
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.0.2
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
+      nproc:
+        soft: 4096
+        hard: 4096
     environment:
       - node.name=es01
       - cluster.name=my-cluster
@@ -9,6 +19,7 @@ services:
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es02,es03
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
     ports:
       - 127.0.0.1:9201:9200
     volumes:
@@ -20,6 +31,16 @@ services:
       retries: 10
   es02:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.0.2
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
+      nproc:
+        soft: 4096
+        hard: 4096
     environment:
       - node.name=es02
       - cluster.name=my-cluster
@@ -28,6 +49,7 @@ services:
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es03
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
     ports:
       - 127.0.0.1:9202:9200
     volumes:
@@ -39,6 +61,16 @@ services:
       retries: 10
   es03:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.0.2
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+      memlock:
+        soft: -1
+        hard: -1
+      nproc:
+        soft: 4096
+        hard: 4096
     environment:
       - node.name=es03
       - cluster.name=my-cluster
@@ -47,6 +79,7 @@ services:
       - cluster.initial_master_nodes=es01,es02,es03
       - discovery.seed_hosts=es01,es02
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - bootstrap.memory_lock=true
     ports:
       - 127.0.0.1:9203:9200
     volumes:

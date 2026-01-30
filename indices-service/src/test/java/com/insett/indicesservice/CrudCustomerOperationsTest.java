@@ -25,22 +25,26 @@ public class CrudCustomerOperationsTest extends AbstractIndicesServiceTests {
         var givenAge = 28;
         Customer customer = createCustomer(givenName, givenEmail, givenAge);
 
-        repository.save(customer);
-        elasticsearchOperations.indexOps(Customer.class).refresh();
-        printAll();
-        customer = repository.findCustomerByUsernameAndEmail(givenName, givenEmail).orElseThrow();
-        Assertions.assertEquals(givenName, customer.getUsername());
-        Assertions.assertEquals(givenEmail, customer.getEmail());
-        Assertions.assertEquals(givenAge, customer.getAge());
+        try {
+            repository.save(customer);
+            elasticsearchOperations.indexOps(Customer.class).refresh();
+            printAll();
+            customer = repository.findCustomerByUsernameAndEmail(givenName, givenEmail).orElseThrow();
+            Assertions.assertEquals(givenName, customer.getUsername());
+            Assertions.assertEquals(givenEmail, customer.getEmail());
+            Assertions.assertEquals(givenAge, customer.getAge());
 
-        customer.setAge(30);
-        customer = repository.save(customer);
-        printAll();
-        Assertions.assertEquals(30, customer.getAge());
-
-        repository.deleteById(customer.getId());
-        elasticsearchOperations.indexOps(Customer.class).refresh();
-        Assertions.assertFalse(repository.existsById(customer.getId()));
+            customer.setAge(30);
+            customer = repository.save(customer);
+            printAll();
+            Assertions.assertEquals(30, customer.getAge());
+        } finally {
+            if (customer.getId() != null) {
+                repository.deleteById(customer.getId());
+                elasticsearchOperations.indexOps(Customer.class).refresh();
+                Assertions.assertFalse(repository.existsById(customer.getId()));
+            }
+        }
     }
 
     private Customer createCustomer(String username, String email, Integer age) {
