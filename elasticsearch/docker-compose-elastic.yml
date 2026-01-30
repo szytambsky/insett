@@ -1,0 +1,82 @@
+x-es-common: &es-common
+  image: docker.elastic.co/elasticsearch/elasticsearch:9.0.2
+  ulimits:
+    nofile:
+      soft: 65535
+      hard: 65535
+    memlock:
+      soft: -1
+      hard: -1
+    nproc:
+      soft: 4096
+      hard: 4096
+
+x-es-env: &es-env
+  cluster.name: my-cluster
+  xpack.security.enabled: "false"
+  xpack.security.http.ssl.enabled: "false"
+  cluster.initial_master_nodes: es01,es02,es03
+  ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+  bootstrap.memory_lock: "true"
+
+services:
+  es01:
+    <<: *es-common
+    environment:
+      <<: *es-env
+      node.name: es01
+      discovery.seed_hosts: es02,es03
+    ports:
+      - 127.0.0.1:9201:9200
+    volumes:
+      - es01-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -s http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  es02:
+    <<: *es-common
+    environment:
+      <<: *es-env
+      node.name: es02
+      discovery.seed_hosts: es01,es03
+    ports:
+      - 127.0.0.1:9202:9200
+    volumes:
+      - es02-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -s http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  es03:
+    <<: *es-common
+    environment:
+      <<: *es-env
+      node.name: es03
+      discovery.seed_hosts: es01,es02
+    ports:
+      - 127.0.0.1:9203:9200
+    volumes:
+      - es03-data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -s http://localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  kibana:
+    image: docker.elastic.co/kibana/kibana:9.0.2
+    depends_on:
+      es01:
+        condition: service_healthy
+    restart: on-failure
+    ports:
+      - 127.0.0.1:5601:5601
+    environment:
+      - ELASTICSEARCH_HOSTS=["http://es01:9200","http://es02:9200","http://es03:9200"]
+
+volumes:
+  es01-data:
+  es02-data:
+  es03-data:

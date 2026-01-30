@@ -1,0 +1,10 @@
+# curl -XPOST "http://localhost:9201/products/_bulk" -H "Content-Type: application/x-ndjson" --data-binary @products-bulk-upload.ndjson
+POST http://localhost:9201/products/_bulk
+Content-Type: application/x-ndjson
+
+< products-bulk-upload.ndjson
+
+###
+
+
+

@@ -12,3 +12,18 @@ TODO: by script ansible/terraform/init.sh
 docker compose -f ./docker-compose.dev.yml \
 up -d --build --force-recreate --remove-orphans
 ```
+
+```bash
+docker compose -f elasticsearch/docker-compose-elastic.yml \
+up -d --build --force-recreate --remove-orphans
+```
+
+```bash
+docker compose -f elasticsearch/docker-compose-es-data.yml \
+run --rm data-setup
+```
+
+```bash
+docker compose -f elasticsearch/docker-compose-es-data.yml \
+up -d --build --force-recreate --remove-orphans
+```
