@@ -1,0 +1,3 @@
+# curl -i http://localhost:7065/api/cards
+GET http://localhost:7065/api/cards
+Content-Type: application/json

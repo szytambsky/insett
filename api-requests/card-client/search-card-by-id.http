@@ -1,0 +1,4 @@
+# curl -i http://localhost:7065/api/cards/{@PathVariable: cardId}
+GET http://localhost:7065/api/cards/bf1bafdc-2739-469b-bde6-c24a868f4979
+Content-Type: application/json
+
